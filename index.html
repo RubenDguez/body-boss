@@ -1,16 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Body Boss</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Body Boss</title>
 
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-<body>
-    <!-- Code Here! -->
-     <!-- code clean -->
 
-    <script src="./assets/js/script.js"></script>
-</body>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" href="./assets/css/landing-style.css" />
+	</head>
+	<body class="bg-black">
+		<header class="container mx-auto py-10">
+            <h1>Body Boss</h1>
+        </header>
+		<main>
+			<section id="hero" class="container mx-auto bg-gradient-to-br from-yellow-500 to-indigo-500">
+				<section id="login" class="text-white flex flex-col">
+					<header>
+                        <h3 id="generalError" class="display-none py-2 text-xl text-red-600 text-center bg-red-300 max-w-lg mx-auto rounded mb-3">General Error Here</h3>
+						<h2 class="text-4xl text-center">Good to see you again</h2>
+					</header>
+					<div>
+						<form id="login" class="container max-w-sm mx-auto flex flex-col gap-4 py-5 px-10">
+							<div class="flex flex-col">
+								<label for="username">Username</label>
+								<input type="text" name="username" id="username" class="rounded p-2 text-black" />
+                                <h5 id="usernameError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2"></h5>
+							</div>
+							<div class="flex flex-col">
+								<label for="password">Password</label>
+								<input type="password" name="password" id="password" class="rounded p-2 text-black" />
+                                <h5 id="passwordError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2"></h5>
+							</div>
+							<input class="border rounded py-2 mt-2 hover:bg-yellow-600" id="submit" type="submit" value="LOGIN" />
+						</form>
+					</div>
+                    <div id="not-registered" class="text-center mt-5">
+                        <h3>Not a member? please <span class="text-gray-600 font-bold"><a href="#">register</a></span></h3>
+                    </div>
+				</section>
+				<section class="hero-image"></section>
+			</section>
+            <section id="partners" class="py-10 gap-4">
+                <img src="./assets/img/planet-fitness.jpg" alt="planet fitness">
+                <img src="./assets/img/lafitness.jpeg" alt="la fitness">
+                <img src="./assets/img/golds-gym.png" alt="golds gym">
+                <img src="./assets/img/crunch-fitness.jpeg" alt="crunch fitness">
+                <img src="./assets/img/anytime-fitness.jpeg" alt="Anytime fitness">
+            </section>
+            <section class="container mx-auto py-10 px-4 flex gap-4 justify-center bg-white">
+                <section class="border rounded p-5">
+                    <header>
+                        <h3>Ruben Dominguez</h3>
+                        <p>The Best Tracking app in the market</p>
+                        <small><i>June 15 2024</i></small>
+                    </header>
+                </section>
+                <section class="border rounded p-5">
+                    <header>
+                        <h3>Ruben Dominguez</h3>
+                        <p>The Best Tracking app in the market</p>
+                        <small><i>June 15 2024</i></small>
+                    </header>
+                </section>
+                <section class="border rounded p-5">
+                    <header>
+                        <h3>Ruben Dominguez</h3>
+                        <p>The Best Tracking app in the market</p>
+                        <small><i>June 15 2024</i></small>
+                    </header>
+                </section>
+                <section class="border rounded p-5">
+                    <header>
+                        <h3>Ruben Dominguez</h3>
+                        <p>The Best Tracking app in the market</p>
+                        <small><i>June 15 2024</i></small>
+                    </header>
+                </section>
+                <section class="border rounded p-5">
+                    <header>
+                        <h3>Ruben Dominguez</h3>
+                        <p>The Best Tracking app in the market</p>
+                        <small><i>June 15 2024</i></small>
+                    </header>
+                </section>
+                <section class="border rounded p-5">
+                    <header>
+                        <h3>Ruben Dominguez</h3>
+                        <p>The Best Tracking app in the market</p>
+                        <small><i>June 15 2024</i></small>
+                    </header>
+                </section>
+            </section>
+		</main>
+		<footer></footer>
+		<script src="./assets/js/script.js"></script>
+        <script src="./assets/js/login.js"></script>
+	</body>
 </html>

@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap');
+
+/* Element */
+body > header > h1 {
+    font-family: 'Sixtyfour', sans-serif;
+    color: goldenrod;
+    font-size: 5rem;
+    letter-spacing: 0.75rem;
+}
+
+/* Classes */
+.hero-image {
+    background-image: url('../img/running-couple.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: difference;
+    width: 100%;
+}
+
+.display-none {
+    display: none;
+}
+
+/* ID Selectors */
+
+#hero {
+    display: flex;
+    min-height: 75vh;
+}
+
+#hero>section {
+    justify-content: center;
+}
+
+#login {
+    min-width: 50%;
+}
+
+#submit {
+    cursor: pointer;
+}
+
+#partners {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#partners img {
+    width: 150px;
+    max-width: 150px;
+}
+
+@media screen and (width <=1279px) {
+    .hero-image {
+        background-position: center;
+    }
+}
+
+@media screen and (width <=1023px) {
+    #login>header>h2 {
+        font-size: 1.75rem;
+    }
+}
+
+@media screen and (width <=820px) {
+    #hero {
+        flex-direction: column;
+    }
+
+    #login>header>h2 {
+        font-size: 2.5rem;
+    }
+
+    #not-registered {
+        padding-bottom: 2rem;
+    }
+
+    .hero-image {
+        min-height: 60vh;
+        background-size: cover;
+    }
+}
