@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap');
+
+body > header > h1 {
+    font-family: 'Sixtyfour', sans-serif;
+    color: goldenrod;
+    font-size: 5rem;
+    letter-spacing: 0.75rem;
+}
+
+.display-none {
+    display: none;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.button {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.button:hover {
+    border: 3px orange solid;
+}
+
+.workout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+}
