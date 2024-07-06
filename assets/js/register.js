@@ -55,7 +55,7 @@ function validatePasswordMatch(password, confirmPassword) {
  */
 function validateUsername(username) {
     let login = getLoginData();
-    
+
     if (!login.length) return true;
 
     generalErrorEl.classList.add(DISPLAY_NONE);
@@ -81,7 +81,7 @@ function validateUsername(username) {
  */
 function validateEmail(email) {
     let users = getUsersData();
-    
+
     if (!users.length) return true;
 
     generalErrorEl.classList.add(DISPLAY_NONE);

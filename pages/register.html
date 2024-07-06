@@ -7,77 +7,79 @@
 
 		<script src="https://cdn.tailwindcss.com"></script>
 		<link rel="stylesheet" href="../assets/css/style.css" />
-        <link rel="stylesheet" href="../assets/css/register.css" />
+		<link rel="stylesheet" href="../assets/css/register.css" />
 	</head>
 	<body class="bg-black">
 		<header class="container mx-auto py-10">
 			<h1>Body Boss</h1>
 		</header>
-        <main>
+		<main>
 			<section id="hero" class="container mx-auto py-5">
 				<section id="login" class="text-white flex flex-col">
 					<header>
-                        <h3 id="generalError" class="display-none py-2 text-xl text-red-600 text-center bg-red-300 max-w-lg mx-auto rounded mb-3">General Error Here</h3>
+						<h3 id="generalError" class="display-none py-2 text-xl text-red-600 text-center bg-red-300 max-w-lg mx-auto rounded mb-3">General Error Here</h3>
 						<h2 class="text-4xl text-center">Register</h2>
 					</header>
-					<div  class="flex flex-col gap-4 py-5 px-10">
+					<div class="flex flex-col gap-4 py-5 px-10">
 						<form id="register" class="flex flex-col">
-                            <div class="flex gap-4">
-                                <div class="flex grow flex-col gap-4">
-                                    <div class="flex flex-col">
-                                        <label for="firstName">First name</label>
-                                        <input type="text" name="firstName" id="firstName" class="rounded p-2 text-black" />
-                                        <h5 id="firstNameError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">First name field is required</h5>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <label for="lastName">Last name</label>
-                                        <input type="text" name="lastName" id="lastName" class="rounded p-2 text-black" />
-                                        <h5 id="lastNameError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Last name field is required</h5>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <label for="email">Email</label>
-                                        <input type="email" name="email" id="email" class="rounded p-2 text-black" />
-                                        <h5 id="emailError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Email field is required</h5>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <label for="gender">Gender</label>
-                                        <select name="gender" id="gender" class="rounded p-2 text-black" >
-                                            <option value="">Select One</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-                                        <h5 id="genderError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Gender field is required</h5>
-                                    </div>
-                                </div>
-                                <div class="flex grow flex-col gap-4">
-                                    <div class="flex flex-col">
-                                        <label for="username">Username</label>
-                                        <input type="text" name="username" id="username" class="rounded p-2 text-black" />
-                                        <h5 id="usernameError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Username field is required</h5>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <label for="password">Password</label>
-                                        <input type="password" name="password" id="password" class="rounded p-2 text-black" />
-                                        <h5 id="passwordError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Password field is required</h5>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <label for="confirm-password">Confirm Password</label>
-                                        <input type="password" name="confirmPassword" id="confirmPassword" class="rounded p-2 text-black" />
-                                        <h5 id="confirmPasswordError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Confirm password is required</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <input class="border rounded py-2 mt-2 hover:bg-yellow-600" id="submit" type="submit" value="REGISTER" />
+							<div class="flex gap-4">
+								<div class="flex grow flex-col gap-4">
+									<div class="flex flex-col">
+										<label for="firstName">First name</label>
+										<input type="text" name="firstName" id="firstName" class="rounded p-2 text-black" />
+										<h5 id="firstNameError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">First name field is required</h5>
+									</div>
+									<div class="flex flex-col">
+										<label for="lastName">Last name</label>
+										<input type="text" name="lastName" id="lastName" class="rounded p-2 text-black" />
+										<h5 id="lastNameError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Last name field is required</h5>
+									</div>
+									<div class="flex flex-col">
+										<label for="email">Email</label>
+										<input type="email" name="email" id="email" class="rounded p-2 text-black" />
+										<h5 id="emailError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Email field is required</h5>
+									</div>
+									<div class="flex flex-col">
+										<label for="gender">Gender</label>
+										<select name="gender" id="gender" class="rounded p-2 text-black">
+											<option value="">Select One</option>
+											<option value="male">Male</option>
+											<option value="female">Female</option>
+										</select>
+										<h5 id="genderError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Gender field is required</h5>
+									</div>
+								</div>
+								<div class="flex grow flex-col gap-4">
+									<div class="flex flex-col">
+										<label for="username">Username</label>
+										<input type="text" name="username" id="username" class="rounded p-2 text-black" />
+										<h5 id="usernameError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Username field is required</h5>
+									</div>
+									<div class="flex flex-col">
+										<label for="password">Password</label>
+										<input type="password" name="password" id="password" class="rounded p-2 text-black" />
+										<h5 id="passwordError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Password field is required</h5>
+									</div>
+									<div class="flex flex-col">
+										<label for="confirm-password">Confirm Password</label>
+										<input type="password" name="confirmPassword" id="confirmPassword" class="rounded p-2 text-black" />
+										<h5 id="confirmPasswordError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Confirm password is required</h5>
+									</div>
+								</div>
+							</div>
+							<input class="border rounded py-2 mt-2 hover:bg-yellow-600" id="submit" type="submit" value="REGISTER" />
 						</form>
 					</div>
-                    <div id="not-registered" class="text-center mt-5">
-                        <h3>Already a member? <span class="text-gray-600 font-bold"><a href="/body-boss/index.html">login</a></span></h3>
-                    </div>
+					<div id="not-registered" class="text-center mt-5">
+						<h3>
+							Already a member? <span class="text-gray-600 font-bold"><a href="/body-boss/index.html">login</a></span>
+						</h3>
+					</div>
 				</section>
-                <section class="hero-image"></section>
+				<section class="hero-image"></section>
 			</section>
-        </main>
-        <script src="../assets/js/script.js"></script>
-        <script src="../assets/js/register.js"></script>
+		</main>
+		<script src="../assets/js/script.js"></script>
+		<script src="../assets/js/register.js"></script>
 	</body>
 </html>

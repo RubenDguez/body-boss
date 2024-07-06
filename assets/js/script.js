@@ -76,7 +76,7 @@ function getCurrentUser() {
 
     console.log(currentUser);
     console.log(users);
-    
+
     const user = users.find((user) => (user.id == currentUser))
 
     console.log('User: ', user)
