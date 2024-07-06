@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Body Boss | Dashboard</title>
+
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" href="../assets/css/style.css" />
+	</head>
+	<body>
+		<header class="flex px-10 py-3 bg-black">
+			<h1 class="grow text-2xl">Body Boss</h1>
+			<div>
+				<input id="logout" class="pointer text-sm border px-5 py-2 hover:bg-yellow-300 rounded bg-white" type="button" value="Logout" />
+			</div>
+		</header>
+		<main class="container mx-auto">
+			<section class="bg-white px-5 py-2">
+				<p class="text-sm text-gray-400"><span id="id" class="italic"></span> | <span id="firstName"></span> <span id="lastName"></span> | <span id="email"></span></p>
+			</section>
+			<section class="flex justify-center gap-4 p-10 border bg-gray-100 rounded mt-10 flex-wrap inset">
+				<div class="flow flow-col space-between text-center border pointer bg-gray-300 button">
+					<p class="text-5xl mb-5">😀</p>
+					<p>Profile</p>
+				</div>
+				<div class="flow flow-col space-between text-center border pointer bg-gray-300 button">
+					<p class="text-5xl mb-5">🏋🏻</p>
+					<p>Workouts</p>
+				</div>
+				<div class="flow flow-col space-between text-center border pointer bg-gray-300 button">
+					<p class="text-5xl mb-5">📈</p>
+					<p>Log Workout</p>
+				</div>
+			</section>
+			<section class="flex flex-col gap-4 py-5 rounded mt-5 inset justify-center">
+				<section class="rounded bg-sky-600">
+                    <div class="flex gap-4 workout bg-gray-200 px-5 py-5 ml-2">
+                        <h1 class="font-bold min-w-52 max-w-52">Workout: <span>Running</span></h1>
+                        <p class="grow ml-10 text-sm">Goal: <span>50 miles</span> <span>Running these miles in a month</span></p>
+                        <div class="w-52 black mx-10 rounded-full h-2.5 dark:bg-gray-700">
+                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 34%"></div>
+                        </div>
+                    </div>
+				</section>
+			</section>
+		</main>
+		<script src="../assets/js/script.js"></script>
+		<script src="../assets/js/dashboard.js"></script>
+	</body>
+</html>

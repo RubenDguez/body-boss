@@ -16,16 +16,15 @@ function displayErrorMessage(message) {
     generalErrorEl.classList.remove(DISPLAY_NONE);
 }
 
-function validateUsernameAndPassword(username, password) {
-    const login = localStorage.getItem('login');
+function login(username, password) {
+    const login = getLoginData();
     
-    if (!login) {
+    if (!login.length) {
         displayErrorMessage(NO_USER_FOUND);
         return false;
     }
 
-    const loginData = JSON.parse(login);
-    const user = loginData.find((user) => (user.username === username));
+    const user = login.find((user) => (user.username === username));
 
     if (!user || user.password !== password) {
         displayErrorMessage(USERNAME_PASS_ERROR_MESSAGE);
@@ -33,7 +32,7 @@ function validateUsernameAndPassword(username, password) {
     }
 
     generalErrorEl.classList.add(DISPLAY_NONE);
-    localStorage.setItem('currentUser', user.id);
+    setCurrentUser(user.id);
     return true;
 }
 
@@ -65,18 +64,16 @@ function handleLoginFormSubmit(event) {
     
     formEl.reset();
 
-    if (validateUsernameAndPassword(username, password)) {
-        redirect('/dashboard.html');
+    if (login(username, password)) {
+        redirect('/pages/dashboard.html');
     }
-}
-
-function init() {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser) return;
-
-    redirect('/dashboard.html');
 }
 
 formEl.addEventListener('submit', handleLoginFormSubmit);
 
-init();
+(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) return;
+
+    redirect('/pages/dashboard.html');
+})();
