@@ -141,7 +141,7 @@ function handleRegistrationForm(event) {
     data.id = Date.now();;
     addUser(data);
     formEl.reset();
-    redirect('../index.html');
+    redirect('index.html');
 }
 
 // Event Listener
