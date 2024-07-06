@@ -70,15 +70,17 @@ function handleLoginFormSubmit(event) {
     }
 }
 
-formEl.addEventListener('submit', handleLoginFormSubmit);
+function init() {
+    formEl.addEventListener('submit', handleLoginFormSubmit);
 
-toRegisterEl.addEventListener('click', function() {
-    redirect('pages/register.html');
-})
+    toRegisterEl.addEventListener('click', function() {
+        redirect('pages/register.html');
+    });
 
-(() => {
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) return;
-
+    
     redirect('pages/dashboard.html');
-})();
+}
+
+init();
