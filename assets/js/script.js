@@ -5,7 +5,7 @@
  * Function to redirect to another page
  */
 function redirect(url) {
-    location.href = url;
+    location.href = '/body-boss/'.concat(url);
 }
 
 /**
@@ -90,7 +90,7 @@ function getCurrentUser() {
  */
 function logout() {
     localStorage.removeItem('currentUser');
-    redirect('../index.html');
+    redirect('index.html');
 }
 
 // Event Listeners
