@@ -65,15 +65,19 @@ function handleLoginFormSubmit(event) {
     formEl.reset();
 
     if (login(username, password)) {
-        redirect('/pages/dashboard.html');
+        redirect('pages/dashboard.html');
     }
 }
 
 formEl.addEventListener('submit', handleLoginFormSubmit);
 
+document.getElementById('toRegister').addEventListener('click', function() {
+    redirect('pages/register.html');
+})
+
 (() => {
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) return;
 
-    redirect('/pages/dashboard.html');
+    redirect('pages/dashboard.html');
 })();

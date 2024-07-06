@@ -18,6 +18,7 @@
 				<section id="login" class="text-white flex flex-col">
 					<header>
 						<h3 id="generalError" class="display-none py-2 text-xl text-red-600 text-center bg-red-300 max-w-lg mx-auto rounded mb-3">General Error Here</h3>
+						<h3 id="redirecting" class="display-none py-2 text-xl text-green-600 text-center max-w-lg mx-auto rounded mb-3">Redirecting to login page in: <span id="counter"></span></h3>
 						<h2 class="text-4xl text-center">Register</h2>
 					</header>
 					<div class="flex flex-col gap-4 py-5 px-10">
@@ -72,7 +73,7 @@
 					</div>
 					<div id="not-registered" class="text-center mt-5">
 						<h3>
-							Already a member? <span class="text-gray-600 font-bold"><a href="/body-boss/index.html">login</a></span>
+							Already a member? <span id="toLogin" class="pointer text-gray-600 font-bold">login</span>
 						</h3>
 					</div>
 				</section>

@@ -5,7 +5,6 @@ const emailEl = document.getElementById('email');
 
 (() => {
     const currentUser = getCurrentUser();
-
     idEl.textContent = currentUser.id;
     firstNameEl.textContent = currentUser.firstName;
     lastNameEl.textContent = currentUser.lastName;

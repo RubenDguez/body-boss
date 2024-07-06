@@ -5,7 +5,12 @@
  * Function to redirect to another page
  */
 function redirect(url) {
-    location.href = '/body-boss/'.concat(url);
+    const currentUrl = document.location.href.split('/')[2];
+
+    const isLocalDev = currentUrl.includes('localhost');
+    const baseUrl = isLocalDev ? '' : '/body-boss/'
+    const isIndex = url.includes('index.html');
+    location.href = baseUrl.concat(isIndex ? '/index.html' : url);
 }
 
 /**
@@ -74,12 +79,8 @@ function getCurrentUser() {
     const currentUser = localStorage.getItem('currentUser');
     const users = getUsersData();
 
-    console.log(currentUser);
-    console.log(users);
-
     const user = users.find((user) => (user.id == currentUser))
 
-    console.log('User: ', user)
     return user;
 }
 
@@ -104,4 +105,10 @@ if (logoutEl) {
     const noscript = document.createElement('noscript');
     noscript.textContent = 'Your browser does not support JavaScript!';
     body.appendChild(noscript);
+
+    const currentUser = getCurrentUser();
+    const currentPage = document.location.href;
+    if (!currentUser && !currentPage.includes('index.html') && !currentPage.includes('register.html')) {
+        redirect('index.html');
+    }
 })();
