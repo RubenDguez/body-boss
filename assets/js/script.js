@@ -10,7 +10,7 @@ function redirect(url) {
     const isLocalDev = currentUrl.includes('localhost');
     const baseUrl = isLocalDev ? '' : '/body-boss/'
     const isIndex = url.includes('index.html');
-    location.href = baseUrl.concat(isIndex ? '/index.html' : url);
+    location.href = baseUrl.concat(isIndex ? 'index.html' : url);
 }
 
 /**

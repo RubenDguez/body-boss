@@ -1,4 +1,5 @@
 const formEl = document.querySelector('form');
+const toRegisterEl = document.getElementById('toRegister');
 
 const usernameEl = document.getElementById('username');
 const usernameErrorEl = document.getElementById('usernameError');
@@ -71,7 +72,7 @@ function handleLoginFormSubmit(event) {
 
 formEl.addEventListener('submit', handleLoginFormSubmit);
 
-document.getElementById('toRegister').addEventListener('click', function() {
+toRegisterEl.addEventListener('click', function() {
     redirect('pages/register.html');
 })
 
