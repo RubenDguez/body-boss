@@ -61,7 +61,6 @@ function validateUsername(username) {
     generalErrorEl.classList.add(DISPLAY_NONE);
 
     for (const data of login) {
-        console.log(data.username)
         if (data.username === username) {
             generalErrorEl.textContent = 'This username has already been registered, do you want to login instead?'
             generalErrorEl.classList.remove(DISPLAY_NONE);
@@ -123,6 +122,8 @@ function handleRegistrationForm(event) {
     event.preventDefault();
 
     const formData = new FormData(formEl);
+    const redirectingEl = document.getElementById('redirecting');
+    const counterEl = document.getElementById('counter');
 
     const data = {
         firstName: formData.get('firstName') || '',
@@ -138,11 +139,29 @@ function handleRegistrationForm(event) {
         return;
     }
 
-    data.id = Date.now();;
+    data.id = Date.now();
     addUser(data);
+
     formEl.reset();
-    redirect('index.html');
+    
+    let limit = 5;
+    redirectingEl.classList.remove(DISPLAY_NONE);
+    counterEl.textContent = limit;
+
+    const interval = setInterval(() => {
+        counterEl.textContent = limit -= 1;
+
+        if (limit <= 0) {
+            clearInterval(interval);
+            redirect('index.html');
+        }
+    }, 1000);
+
 }
 
-// Event Listener
+// Event Listeners
+document.getElementById('toLogin').addEventListener('click', function() {
+    redirect('index.html');
+})
+
 formEl.addEventListener('submit', handleRegistrationForm);
