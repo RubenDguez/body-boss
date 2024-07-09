@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Body Boss</title>
+
+		<script src="https://cdn.tailwindcss.com"></script>
+		
+		<link rel="stylesheet" href="./assets/css/style.css" />
+		<link rel="stylesheet" href="./assets/css/landing-style.css" />
+	</head>
+	<body class="bg-black">
+		<header class="container mx-auto py-10">
+			<h1>Body Boss</h1>
+		</header>
+		<main>
+<!--
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+
+
+  ```
+-->
+	<form action="submit">
+        <div class="container flex flex-col mx-auto gap-4">
+            <h1 style="color: aliceblue;">Select your Program!!!!!</h1>
+            
+            <label style="color: azure;">Work out type:</label>
+            <select id="workoutType" name="workoutType" required>
+				<option value="Cardio">Cardio</option>
+				<option value="Strengh"> Strengh</option>
+				<option value="Flexiblity"> Flexiblity</option>
+				<option value="other" Other</option>
+				</select>
+				<span class = "Error" id="workoutTypeError"></span>
+
+
+            <label for="duration" style="color: azure;"> Duration of workout</label>
+            <input type="number" id="duration" name="duration">
+			 <span class="Error" id="durationError"></span>
+
+            <label for="Frequency" style="color: azure;">Frequency of workouts per week</label>
+			<input type="number" id="Frequency" name="Frequency" min="1" max="120"required>
+			<span class="Error" id=" FrequencyError"></span>
+
+			<label for="notes"></label>
+			<textarea id="notes" name="notes"></textarea>
+
+			<button type ="submit">Submit</button>
+        
+			<img src="download.jpeg" alt="person weightlifting" width="42" height="42" style="border:5px solid rgb(0, 0, 0)">
+
+	
+		<footer>
+		</footer>
+		<script src="./assets/js/script.js"></script>
+		<script src="./assets/js/login.js"></script>
+	</body>
+</html>
