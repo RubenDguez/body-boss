@@ -7,10 +7,12 @@
 function redirect(url) {
     const currentUrl = document.location.href.split('/')[2];
 
-    const isLocalDev = currentUrl.includes('localhost');
+    const isLocalDev = (currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1'));
     const baseUrl = isLocalDev ? '' : '/body-boss/'
+
     const isIndex = url.includes('index.html');
-    location.href = baseUrl.concat(isIndex ? 'index.html' : url);
+
+    location.href = baseUrl.concat(isIndex ? '/index.html' : url);
 }
 
 /**
