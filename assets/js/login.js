@@ -27,7 +27,9 @@ function login(username, password) {
 
     const user = login.find((user) => (user.username === username));
 
-    if (!user || user.password !== password) {
+    const hashedPassword = CryptoJS.MD5(`${password}${username}`).toString();
+
+    if (!user || user.password !== hashedPassword) {
         displayErrorMessage(USERNAME_PASS_ERROR_MESSAGE);
         return false;
     }

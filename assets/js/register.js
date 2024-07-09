@@ -104,11 +104,12 @@ function validateEmail(email) {
  */
 function addUser(data) {
     const login = getLoginData();
-    login.push({ id: data.id, username: data.username, password: data.password });
+    const password = CryptoJS.MD5(`${data.password}${data.username}`).toString();
+    login.push({ id: data.id, username: data.username, password });
     setLoginData(login);
 
     const users = getUsersData();
-    users.push(data);
+    users.push({ ...data, password, confirmPassword: ''});
     setUsersData(users);
 }
 
