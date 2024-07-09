@@ -129,7 +129,6 @@ function handleRegistrationForm(event) {
         firstName: formData.get('firstName') || '',
         lastName: formData.get('lastName') || '',
         email: formData.get('email') || '',
-        gender: formData.get('gender') || '',
         username: formData.get('username') || '',
         password: formData.get('password') || '',
         confirmPassword: formData.get('confirmPassword') || '',
