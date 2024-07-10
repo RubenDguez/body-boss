@@ -83,25 +83,29 @@ function validatePassword(password, confirmPassword) {
 }
 
 function save(data) {
+    const info = {...data}; 
     const users = getUsersData().filter((user) => (user.id !== currentUser.id));
     const logins = getLoginData().filter((user) => (user.id !== currentUser.id));
-    const info = {...data};
 
-    delete info.confirmPassword;
+    delete info.confirmPassword; // confirm password is not needed in the user object
 
+    // if password is empty, remove it
     if (!info.password) {
         delete info.password;
     }
 
+    // if password, encrypt it
     if (info.password) {
         info.password = CryptoJS.MD5(`${info.password}${info.username}`).toString();
     }
 
+    // update USERS in local storage 
     users.push({...currentUser, ...info});
     localStorage.setItem('users', JSON.stringify(users));
 
-    logins.push({id: currentUser.id, username: currentUser.username, })
-    console.log()
+    // update LOGINS in local storage
+    logins.push({id: currentUser.id, username: info.username, password: info.password || currentUser.password});
+    localStorage.setItem('login', JSON.stringify(logins));
 }
 
 function handleSave(event) {
@@ -117,12 +121,13 @@ function handleSave(event) {
         confirmPassword: formData.get('profileModal_confirmPassword') || '',
     }
 
-    const isValid = validateUserInformation(data);
+    const isValidInformation = validateUserInformation(data);
     const isValidPassword = validatePassword(data.password, data.confirmPassword);
 
-    if (isValid && isValidPassword) {
+    if (isValidInformation && isValidPassword) {
         save(data);
         handleDisplayProfileModal();
+        location.reload();
     }
 }
 
