@@ -35,3 +35,28 @@ body>header>h1 {
     border-radius: 8px 0 0 8px;
     cursor: pointer;
 }
+
+/* 
+added
+ */
+
+ body {
+    background-color: white; /* Bootstrap success background color */
+}
+
+.card {
+    margin-bottom: 1rem;
+}
+
+.card-body h5 {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    margin-bottom: 0.5rem;
+}
+
+.form-select,
+.form-control {
+    margin-bottom: 1rem;
+}
