@@ -30,39 +30,41 @@
 
   ```
 -->
-	<form action="submit">
+	<form id="submit" class="bg-orange-600 w-100">
         <div class="container flex flex-col mx-auto gap-4">
-            <h1 style="color: aliceblue;">Select your Program!!!!!</h1>
+            <h1 class=" text-center text-4xl text-stone-950">Select your Program!</h1>
             
-            <label style="color: azure;">Work out type:</label>
+            <label >Work out type:</label>
             <select id="workoutType" name="workoutType" required>
 				<option value="Cardio">Cardio</option>
 				<option value="Strengh"> Strengh</option>
 				<option value="Flexiblity"> Flexiblity</option>
-				<option value="other" Other</option>
+				<option value="custom">custom</option>
 				</select>
 				<span class = "Error" id="workoutTypeError"></span>
 
 
-            <label for="duration" style="color: azure;"> Duration of workout</label>
-            <input type="number" id="duration" name="duration">
+            <label class ="text-stone-950" for="duration"> Duration of workout</label>
+            <input type="number" id="duration" name="duration" min="1" max="120"
 			 <span class="Error" id="durationError"></span>
 
-            <label for="Frequency" style="color: azure;">Frequency of workouts per week</label>
-			<input type="number" id="Frequency" name="Frequency" min="1" max="120"required>
-			<span class="Error" id=" FrequencyError"></span>
+            <label for="frequency":>Frequency of workouts per week</label>
+			<input type="number" id="frequency" name="frequency" min="1" max="7"required>
+			<span class="Error" id=" frequencyError"></span>
 
-			<label for="notes"></label>
-			<textarea id="notes" name="notes"></textarea>
+ 
 
-			<button type ="submit">Submit</button>
-        
-			<img src="download.jpeg" alt="person weightlifting" width="42" height="42" style="border:5px solid rgb(0, 0, 0)">
+			<label for="Notes">Notes</label>
+			<textarea id="=Notes" name="Notes"></textarea>
 
+
+			<input type="submit" vaule="Submit"/>
 	
 		<footer>
 		</footer>
 		<script src="./assets/js/script.js"></script>
 		<script src="./assets/js/login.js"></script>
+		<script src="../assets/js/webform.js"></script>
 	</body>
 </html>
+
