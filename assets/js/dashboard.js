@@ -6,6 +6,7 @@ const profileButtonEl = document.getElementById('profileButton');
 const bmiCalcButtonEl = document.getElementById('bmiCalcButton')
 const profileModalEl = document.getElementById('profileModal');
 const bmiCalcModalEl = document.getElementById('bmiCalcModal')
+const color = { bgColor: '', textColor: '', progressBgColor: '' };
 
 const DISPLAY_NONE = 'display-none';
 
@@ -36,7 +37,7 @@ function validateEmail(email) {
 
     if (!users.length) return true;
 
-    const isValid = users.find((user) => (user.email === email)) === undefined; 
+    const isValid = users.find((user) => (user.email === email)) === undefined;
 
     if (!isValid) {
         const errorMessageEl = document.getElementById('profileModal_generalError');
@@ -49,7 +50,7 @@ function validateEmail(email) {
 
 function validateUsername(username) {
     const users = getUsersData().filter((user) => (user.id !== currentUser.id));
-    
+
     if (!users.length) return true;
 
     const isValid = users.find((user) => (user.username === username)) === undefined;
@@ -77,7 +78,7 @@ function validateEmptyFields(data) {
 }
 
 function validateUserInformation(data) {
-    const info = {...data};
+    const info = { ...data };
     delete info.password;
     delete info.confirmPassword;
 
@@ -86,7 +87,7 @@ function validateUserInformation(data) {
 
 function validatePassword(password, confirmPassword) {
     const errorMessageEl = document.getElementById('profileModal_confirmPasswordError');
-    
+
     if (password !== confirmPassword) {
         errorMessageEl.textContent = 'Passwords do not match'
         errorMessageEl.classList.remove(DISPLAY_NONE);
@@ -97,7 +98,7 @@ function validatePassword(password, confirmPassword) {
 }
 
 function save(data) {
-    const info = {...data}; 
+    const info = { ...data };
     const users = getUsersData().filter((user) => (user.id !== currentUser.id));
     const logins = getLoginData().filter((user) => (user.id !== currentUser.id));
 
@@ -114,17 +115,17 @@ function save(data) {
     }
 
     // update USERS in local storage 
-    users.push({...currentUser, ...info});
+    users.push({ ...currentUser, ...info });
     localStorage.setItem('users', JSON.stringify(users));
 
     // update LOGINS in local storage
-    logins.push({id: currentUser.id, username: info.username, password: info.password || currentUser.password});
+    logins.push({ id: currentUser.id, username: info.username, password: info.password || currentUser.password });
     localStorage.setItem('login', JSON.stringify(logins));
 }
 
 function handleSave(event) {
     event.stopPropagation();
-    event.preventDefault();   
+    event.preventDefault();
     const formEl = document.querySelector('form');
     const formData = new FormData(formEl);
     const data = {
@@ -158,6 +159,7 @@ function calculateBMI(event) {
     const calcOutput = document.getElementById('bmiCalcModal_calcOutput');
     const calcNumber = document.getElementById('bmiCalcModal_calcNumber');
     const bmiMeaning = document.getElementById('bmiCalcModal_bmiMeaning');
+    const bmiProgressBar = document.getElementById('bmiProgressBar');
     const formData = new FormData(calculateBMIFormEl);
     const results = {};
 
@@ -173,37 +175,62 @@ function calculateBMI(event) {
         return;
     }
 
-    const bmi = (data.weight / inches / inches) * 703;
+    if (color.bgColor !== '') {
+        calcOutput.classList.remove(color.bgColor);
+        calcOutput.classList.remove(color.textColor);
+        bmiProgressBar.classList.remove(color.progressBgColor);
+    }
 
-    if (bmi < 18.4) {
+    const bmi = ((data.weight / inches / inches) * 703).toFixed(1);
+
+    const calcPercentage = (max, min, bmi) => {
+        const diff = (max - min);
+        const bmiDiff = (bmi - min);
+        return ((bmiDiff * 100) / diff).toFixed(1);
+    }
+
+    if (bmi <= 18.4) {
         results.message = 'Under weight';
         results.color = 'blue'
+        results.percent = 0;
     }
     if (bmi >= 18.5 && bmi <= 24.9) {
         results.message = 'Normal weight';
         results.color = 'green';
-    } 
-    if (bmi >=25 && bmi <= 29.9) {
+        results.percent = calcPercentage(24.9, 18.5, bmi);
+    }
+    if (bmi >= 25 && bmi <= 29.9) {
         results.message = 'Overweight';
         results.color = 'yellow';
+        results.percent = calcPercentage(29.9, 25, bmi);
     }
     if (bmi >= 30 && bmi <= 34.9) {
         results.message = 'Obese';
         results.color = 'orange';
+        results.percent = calcPercentage(34.9, 30, bmi);
     }
     if (bmi >= 35) {
         results.message = 'Extremely Obese';
         results.color = 'red';
+        results.percent = 100;
     }
 
-    calcOutput.classList.add(`text-${results.color}-600`, `bg-${results.color}-200`);
+    color.bgColor = `bg-${results.color}-200`;
+    color.progressBgColor = `bg-${results.color}-500`;
+    color.textColor = `text-${results.color}-600`;
+
+    calcOutput.classList.add(color.bgColor);
+    calcOutput.classList.add(color.textColor);
     calcOutput.classList.remove(DISPLAY_NONE);
-    
-    calcNumber.textContent = `Your BMI: ${bmi.toFixed(1)}`;
+
+    calcNumber.textContent = `Your BMI: ${bmi}`;
     bmiMeaning.textContent = results.message;
+
+    bmiProgressBar.setAttribute('style', `width: ${results.percent}%`);
+    bmiProgressBar.classList.add(color.progressBgColor);
 }
 
-profileButtonEl.addEventListener('click', function() {
+profileButtonEl.addEventListener('click', function () {
     const pModal = 'profileModal_'
     const formEl = document.querySelector('form');
     const firstNameEl = document.getElementById(pModal.concat('firstName'));
@@ -213,7 +240,7 @@ profileButtonEl.addEventListener('click', function() {
     const cancelButton = document.getElementById(pModal.concat('cancelButton'));
 
     handleDisplayProfileModal()
-    
+
     firstNameEl.value = currentUser.firstName;
     lastNameEl.value = currentUser.lastName;
     emailEl.value = currentUser.email;
@@ -223,19 +250,17 @@ profileButtonEl.addEventListener('click', function() {
     cancelButton.addEventListener('click', handleCancel);
 });
 
-bmiCalcButtonEl.addEventListener('click', function() {
+bmiCalcButtonEl.addEventListener('click', function () {
     const cancelButtonEl = document.getElementById('bmiCalcModal_cancelButton');
     const calculateBMIFormEl = document.querySelectorAll('form')[1];
 
     handleDisplayBMICalcModal();
 
-    console.log(calculateBMIFormEl);
-
     cancelButtonEl.addEventListener('click', handleCancelBMICalcModal);
     calculateBMIFormEl.addEventListener('submit', calculateBMI);
 });
 
-document.body.addEventListener('keydown', function(event) {
+document.body.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
         profileModalEl.classList.add(DISPLAY_NONE);
         bmiCalcModalEl.classList.add(DISPLAY_NONE);

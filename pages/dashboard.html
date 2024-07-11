@@ -132,13 +132,18 @@
 								</div>
 							</header>
 							<div class="mt-10 px-10 pb-10">
-								<div id="bmiCalcModal_calcOutput" class="display-none border rounded mb-3 py-4">
+								<div id="bmiCalcModal_calcOutput" class="display-none rounded mb-3 pt-4">
 									<h2 id="bmiCalcModal_calcNumber" class="text-center text-4xl"></h2>
 									<p id="bmiCalcModal_bmiMeaning" class="text-center text-lg"></p>
+									<div class="black mx-auto mt-5 rounded-full h-2 dark:bg-gray-700">
+										<div id="bmiProgressBar" class="h-2 rounded-full"></div>
+									</div>
 								</div>
 								<h2 id="bmiCalcModal_generalError" class="display-none text-center bg-red-200 text-red-600 border rounded mb-3"></h2>
 								<form id="bmiCalcModal_form" class="flex flex-col gap-4">
-									<p class="text-gray-400 text-sm italic">Body Mass Index (BMI) is a medical screening tool that estimates body fat percentage by comparing a person's weight to their height.</p>
+									<p class="text-gray-400 text-sm italic">
+										Body Mass Index (BMI) is a medical screening tool that estimates body fat percentage by comparing a person's weight to their height.
+									</p>
 									<ol class="flex flex-col gap-4">
 										<li>
 											<h3 class="text-2xl font-bold mb-5">Height</h3>
@@ -156,7 +161,7 @@
 											</div>
 										</li>
 										<li>
-											<h3 class="text-2xl font-bold mb-5">Wight</h3>
+											<h3 class="text-2xl font-bold mb-5">Weight</h3>
 											<div class="flex gap-4 grow">
 												<div>
 													<label for="bmiCalcModal_pounds">Pounds</label>
