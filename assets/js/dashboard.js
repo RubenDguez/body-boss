@@ -3,7 +3,9 @@ const firstNameEl = document.getElementById('firstName');
 const lastNameEl = document.getElementById('lastName');
 const emailEl = document.getElementById('email');
 const profileButtonEl = document.getElementById('profileButton');
+const bmiCalcButtonEl = document.getElementById('bmiCalcButton')
 const profileModalEl = document.getElementById('profileModal');
+const bmiCalcModalEl = document.getElementById('bmiCalcModal')
 
 const DISPLAY_NONE = 'display-none';
 
@@ -15,6 +17,18 @@ function handleDisplayProfileModal() {
     errorMessageEl.classList.add(DISPLAY_NONE);
 
     profileModalEl.classList.toggle(DISPLAY_NONE);
+}
+
+function handleDisplayBMICalcModal() {
+    const errorMessageEl = document.getElementById('bmiCalcModal_generalError');
+    errorMessageEl.textContent = ''
+    errorMessageEl.classList.add(DISPLAY_NONE);
+
+    bmiCalcModalEl.classList.toggle(DISPLAY_NONE);
+}
+
+function handleCancelBMICalcModal() {
+    location.reload();
 }
 
 function validateEmail(email) {
@@ -109,6 +123,7 @@ function save(data) {
 }
 
 function handleSave(event) {
+    event.stopPropagation();
     event.preventDefault();   
     const formEl = document.querySelector('form');
     const formData = new FormData(formEl);
@@ -135,6 +150,59 @@ function handleCancel() {
     handleDisplayProfileModal();
 }
 
+function calculateBMI(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    const calculateBMIFormEl = document.querySelectorAll('form')[1];
+    const calcOutput = document.getElementById('bmiCalcModal_calcOutput');
+    const calcNumber = document.getElementById('bmiCalcModal_calcNumber');
+    const bmiMeaning = document.getElementById('bmiCalcModal_bmiMeaning');
+    const formData = new FormData(calculateBMIFormEl);
+    const results = {};
+
+    const data = {
+        feet: parseInt(formData.get('bmiCalcModal_feet')) || 0,
+        inch: parseInt(formData.get('bmiCalcModal_inches')) || 0,
+        weight: parseFloat(formData.get('bmiCalcModal_pounds')) || 0,
+    }
+
+    const inches = (data.feet * 12) + data.inch;
+
+    if (inches === 0 || data.weight === 0) {
+        return;
+    }
+
+    const bmi = (data.weight / inches / inches) * 703;
+
+    if (bmi < 18.4) {
+        results.message = 'Under weight';
+        results.color = 'blue'
+    }
+    if (bmi >= 18.5 && bmi <= 24.9) {
+        results.message = 'Normal weight';
+        results.color = 'green';
+    } 
+    if (bmi >=25 && bmi <= 29.9) {
+        results.message = 'Overweight';
+        results.color = 'yellow';
+    }
+    if (bmi >= 30 && bmi <= 34.9) {
+        results.message = 'Obese';
+        results.color = 'orange';
+    }
+    if (bmi >= 35) {
+        results.message = 'Extremely Obese';
+        results.color = 'red';
+    }
+
+    calcOutput.classList.add(`text-${results.color}-600`, `bg-${results.color}-200`);
+    calcOutput.classList.remove(DISPLAY_NONE);
+    
+    calcNumber.textContent = `Your BMI: ${bmi.toFixed(1)}`;
+    bmiMeaning.textContent = results.message;
+}
+
 profileButtonEl.addEventListener('click', function() {
     const pModal = 'profileModal_'
     const formEl = document.querySelector('form');
@@ -155,9 +223,22 @@ profileButtonEl.addEventListener('click', function() {
     cancelButton.addEventListener('click', handleCancel);
 });
 
+bmiCalcButtonEl.addEventListener('click', function() {
+    const cancelButtonEl = document.getElementById('bmiCalcModal_cancelButton');
+    const calculateBMIFormEl = document.querySelectorAll('form')[1];
+
+    handleDisplayBMICalcModal();
+
+    console.log(calculateBMIFormEl);
+
+    cancelButtonEl.addEventListener('click', handleCancelBMICalcModal);
+    calculateBMIFormEl.addEventListener('submit', calculateBMI);
+});
+
 document.body.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
-        profileModalEl.classList.add(DISPLAY_NONE)
+        profileModalEl.classList.add(DISPLAY_NONE);
+        bmiCalcModalEl.classList.add(DISPLAY_NONE);
     }
 });
 
