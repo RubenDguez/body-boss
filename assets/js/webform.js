@@ -40,46 +40,34 @@ const frequnceyError = document.getElementById('frequency');
 //     workoutTypeError.style.display = "none";
 // }
 
-
-
-
-
-
-// }
-
-
-
-
-
-
-if (isValid) {
+ if (isValid) {
     const data = {
-        workoutType,
-        duration,
-        frequncey,
+        workoutType: workoutType.value,
+        duration: duration.value,
+        frequency: frequency.value,
         notes: document.getElementById('notes').value
 
 
+}
+};
 
+const submitForm = document.getElementById("workoutForm");
+submitForm.addEventListener("submit", submitWorkout);
+
+function submitWorkout(event) {
+event.preventDefault();
+const workoutType = document.getElementById('workoutType');
+const duration = document.getElementById('duration');
+const frequency = document.getElementById('frequency');
+const notes = document.getElementById('notes');
+
+const newWorkout = {
+ workoutType: workoutType.value,
+ duration: duration.value,
+ frequency: frequency.value,
+ notes: notes.value
+};
+
+localStorage.setItem("newWorkout", JSON.stringify(newWorkout));
+alert('Workout data saved successfully!')
     };
-
-
- 
-    
-
-}
-function submitWorkout(event){
-    event.preventDefault()
-    const newWorkout={
-        workoutType:workoutType.value,
-        duration: duration.value,
-        frequncey: frequncey.value,
-    
-    }
-
-    localStorage.setItem("newWorkout",JSON.stringify(newWorkout))
-
-}
-
-const submitForm = document.getElementById("submit")
-submitForm.addEventListener("submit",submitWorkout)
