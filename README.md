@@ -14,7 +14,7 @@ Body Boss solves the problem of scattered and inconsistent fitness tracking by p
 ### What Did We Learn?
 During the development of Body Boss, we learned about the intricacies of client-side storage, the importance of responsive design, and the effectiveness of using CSS frameworks for rapid development. We also gained insights into user experience design and the importance of intuitive interfaces.
 
-## Table of Contents (Optional)
+## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
