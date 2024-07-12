@@ -1,73 +1,62 @@
-
-
-let isValid = true;
-
-// Validate workout type
-const workoutType = document.getElementById('workoutType');
-const workoutTypeError = document.getElementById('workoutTypeError');
-if (workoutType.value === "") {
-    workoutTypeError.textContent = "select workout type"
-    workoutTypeError.style.display = "please select work out";
-    localStorage.setItem("workoutType")
-    document.getElementById("workoutType").innerHTML = sessionStorage.getItem("workoutType");
-    isValid = false;
-} else {
-    workoutTypeError.style.display = "none";
-}
-
-// / Validate Duration
-const duration = document.getElementById('duration');
-const durationError = document.getElementById('durationError');
-if (duration.value === "" || duration.vaule < 1 || duration.vaule > 120) {
-    durationError.textContent = "enter duration between 1 and 120"
-    durationError.style.display = "please set duration";
-    document.getElementById("duration").innerHTML = sessionStorage.getItem("Duration");
-    isValid = false;
-} else {
-    workoutTypeError.style.display = "none";
-}
-
-// / Validate Frequncey
-const frequncey = document.getElementById('frequency');
-const frequnceyError = document.getElementById('frequency');
-// if (frequncey.value === "" || frequncey.vaule < 1 || frequncey.vaule > 7) {
-//     workoutTypeError.textContent = "enter valid ferquency"
-//     workoutTypeError.style.display = "block";
-//     localStorage.setItem("frequncey")
-//     document.getElementById("frequncey").innerHTML = sessionStorage.getItem("Frequncey");
-//     isValid = false;
-// } else {
-//     workoutTypeError.style.display = "none";
-// }
-
- if (isValid) {
-    const data = {
-        workoutType: workoutType.value,
-        duration: duration.value,
-        frequency: frequency.value,
-        notes: document.getElementById('notes').value
-
-
-}
-};
-
-const submitForm = document.getElementById("workoutForm");
-submitForm.addEventListener("submit", submitWorkout);
+const submitForm = document.getElementById("submit");
 
 function submitWorkout(event) {
-event.preventDefault();
-const workoutType = document.getElementById('workoutType');
-const duration = document.getElementById('duration');
-const frequency = document.getElementById('frequency');
-const notes = document.getElementById('notes');
+    event.preventDefault();
+    const workoutType = document.getElementById('workoutType');
+    const duration = document.getElementById('duration');
+    const frequency = document.getElementById('frequency');
+    const notes = document.getElementById('notes');
+    let isValid = true;
 
-const newWorkout = {
- workoutType: workoutType.value,
- duration: duration.value,
- frequency: frequency.value,
- notes: notes.value
-};
+    // Validate workout type
 
-localStorage.setItem("newWorkout", JSON.stringify(newWorkout));
-alert('Workout data saved successfully!')
-    };
+    const workoutTypeError = document.getElementById('workoutTypeError');
+    if (workoutType.value === "") {
+        workoutTypeError.textContent = "select workout type"
+        workoutTypeError.style.display = "please select work out";
+        localStorage.setItem("workoutType")
+        document.getElementById("workoutType").innerHTML = sessionStorage.getItem("workoutType");
+        isValid = false;
+    } else {
+        workoutTypeError.style.display = "none";
+    }
+
+    // / Validate Duration
+    const durationError = document.getElementById('durationError');
+    if (duration.value === "" || duration.value < 1 || duration.value > 120) {
+        durationError.textContent = "enter duration between 1 and 120"
+        durationError.style.display = "please set duration";
+        document.getElementById("duration").innerHTML = sessionStorage.getItem("duration");
+        isValid = false;
+    } else {
+        workoutTypeError.style.display = "none";
+    }
+
+    // / Validate Frequncey
+    const frequncey = document.getElementById('frequency');
+    const frequnceyError = document.getElementById('frequency');
+    if (frequncey.value === "" || frequncey.value < 1 || frequncey.value > 7) {
+        workoutTypeError.textContent = "enter valid ferquency"
+        workoutTypeError.style.display = "block";
+        localStorage.setItem("frequncey")
+        document.getElementById("frequncey").innerHTML = sessionStorage.getItem("Frequncey");
+        isValid = false;
+    } else {
+        workoutTypeError.style.display = "none";
+    }
+    const notesEl = document.getElementById('notes')
+    if (isValid) {
+        const data = {
+            type: workoutType.value,
+            actual: 0,
+            goal: frequency.value,
+            notes: notesEl.value,
+        }
+        
+        localStorage.setItem("workout", JSON.stringify(data));
+        alert('Workout data saved successfully!')
+    }
+}
+
+console.log(submitForm)
+submitForm.addEventListener("submit", submitWorkout);
