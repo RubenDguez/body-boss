@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Body Boss</title>
+
+		<script src="https://cdn.tailwindcss.com"></script>
+		
+		<link rel="stylesheet" href="./assets/css/style.css" />
+		<link rel="stylesheet" href="./assets/css/landing-style.css" />
+	</head>
+	<body class="bg-black">
+		<header class="container mx-auto py-10">
+			<h1>Body Boss</h1>
+		</header>
+		<main>
+<!--
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+}
+
+  ```
+-->
+	<form id="submit" class="bg-orange-600 w-100">
+        <div class="container flex flex-col mx-auto gap-4">
+            <h1 class=" text-center text-4xl text-stone-950">Select your Program!</h1>
+            
+            <label >Work out type:</label>
+            <select id="workoutType" name="workoutType" required>
+				<option value="Cardio">Cardio</option>
+				<option value="Strengh"> Strengh</option>
+				<option value="Flexiblity"> Flexiblity</option>
+				<option value="custom">custom</option>
+				</select>
+				<span class = "Error" id="workoutTypeError"></span>
+
+
+            <label class ="text-stone-950" for="duration"> Duration of workout</label>
+			<input type="number" id="duration" name="duration" min="1" max="120">
+			 <span class="Error" id="durationError"></span>
+
+            <label for="frequency":>Frequency of workouts per week</label>
+			<input type="number" id="frequency" name="frequency" min="1" max="7"required>
+			<span class="Error" id=" frequencyError"></span>
+
+ 
+
+			<label for="notes">Notes</label>
+			<textarea id="notes" name="notes"></textarea>
+
+
+			<input type="submit" vaule="submit"/>
+	
+		<footer>
+		</footer>
+		<script src="../assets/js/script.js"></script>
+		<script src="../assets/js/webform.js"></script>
+	</body>
+</html>
+
