@@ -1,62 +1,118 @@
-const submitForm = document.getElementById("submit");
+const newWorkoutModal = document.getElementById('newWorkoutModal')
+const submitForm = document.getElementById('newWorkout_form');
 
+const workoutTypeEl = document.getElementById('workoutType');
+const workoutTypeError = document.getElementById('workoutTypeError');
+
+const goalEl = document.getElementById('goal');
+const goalErrorEl = document.getElementById('goalError')
+
+const notesEl = document.getElementById('notes');
+const notesErrorEl = document.getElementById('notesError');
+
+const WORKOUT = 'workout';
+
+/**
+ * Validate Data
+ * @param {*} data 
+ * @returns {boolean}
+ * @description
+ * Function to validate the workout data
+ */
+function validateData(data) {
+    // Validate workout type
+    if (data.type === '') {
+        workoutTypeError.textContent = 'select workout type';
+        workoutTypeEl.classList.remove(DISPLAY_NONE);
+        return false;
+    }
+    workoutTypeError.classList.add(DISPLAY_NONE);
+
+    // validate goal
+    if (data.goal < 1) {
+        goalErrorEl.textContent = 'Enter valid frequency';
+        goalErrorEl.classList.remove(DISPLAY_NONE);
+        return false;
+    }
+    goalErrorEl.classList.add(DISPLAY_NONE);
+
+    // validate notes
+    if (data.notes === '') {
+        notesErrorEl.textContent = 'Enter a valid note';
+        notesErrorEl.classList.remove(DISPLAY_NONE);
+        return false;
+    }
+    notesErrorEl.classList.add(DISPLAY_NONE);
+
+    return true;
+}
+
+/**
+ * Get Workout List
+ * @returns {Array}
+ * @description
+ * Function to get the workout list from local storage by currently logged in user
+ */
+function getWorkoutList() {
+    const workout = localStorage.getItem(WORKOUT)
+    if (!workout) return [];
+
+    const data = JSON.parse(workout);
+    const currentUser = localStorage.getItem('currentUser');
+
+    if (data[currentUser] === undefined) return [];
+
+    return data[currentUser];
+}
+
+/**
+ * Save Workout
+ * @param {*} data 
+ * @returns {void}
+ * @description
+ * Function to save the workout data to local storage
+ */
+function saveWorkout(data) {
+    const workoutList = getWorkoutList();
+    const storedWorkout = JSON.parse(localStorage.getItem(WORKOUT)) || [];
+    const currentUser = localStorage.getItem('currentUser');
+    const timestamp = new Date().getTime();
+    const workout = { ...storedWorkout, [currentUser]: [...workoutList, { id: timestamp, createdAt: timestamp, updatedAt: timestamp, ...data }] }
+
+    localStorage.setItem(WORKOUT, JSON.stringify(workout));
+}
+
+/**
+ * Submit Workout
+ * @param {*} event
+ * @returns {void}
+ * @description
+ * Function to submit the workout form
+ */
 function submitWorkout(event) {
     event.preventDefault();
-    const workoutType = document.getElementById('workoutType');
-    const duration = document.getElementById('duration');
-    const frequency = document.getElementById('frequency');
-    const notes = document.getElementById('notes');
-    let isValid = true;
+    const formEl = document.querySelectorAll('form')[2];
 
-    // Validate workout type
+    const formData = new FormData(formEl);
 
-    const workoutTypeError = document.getElementById('workoutTypeError');
-    if (workoutType.value === "") {
-        workoutTypeError.textContent = "select workout type"
-        workoutTypeError.style.display = "please select work out";
-        localStorage.setItem("workoutType")
-        document.getElementById("workoutType").innerHTML = sessionStorage.getItem("workoutType");
-        isValid = false;
-    } else {
-        workoutTypeError.style.display = "none";
+    let data = {
+        type: formData.get('workoutType'),
+        goal: parseInt(formData.get('goal')) || 1,
+        notes: formData.get('notes'),
     }
 
-    // / Validate Duration
-    const durationError = document.getElementById('durationError');
-    if (duration.value === "" || duration.value < 1 || duration.value > 120) {
-        durationError.textContent = "enter duration between 1 and 120"
-        durationError.style.display = "please set duration";
-        document.getElementById("duration").innerHTML = sessionStorage.getItem("duration");
-        isValid = false;
-    } else {
-        workoutTypeError.style.display = "none";
-    }
+    const isValidData = validateData(data);
 
-    // / Validate Frequncey
-    const frequncey = document.getElementById('frequency');
-    const frequnceyError = document.getElementById('frequency');
-    if (frequncey.value === "" || frequncey.value < 1 || frequncey.value > 7) {
-        workoutTypeError.textContent = "enter valid ferquency"
-        workoutTypeError.style.display = "block";
-        localStorage.setItem("frequncey")
-        document.getElementById("frequncey").innerHTML = sessionStorage.getItem("Frequncey");
-        isValid = false;
-    } else {
-        workoutTypeError.style.display = "none";
-    }
-    const notesEl = document.getElementById('notes')
-    if (isValid) {
-        const data = {
-            type: workoutType.value,
-            actual: 0,
-            goal: frequency.value,
-            notes: notesEl.value,
-        }
-        
-        localStorage.setItem("workout", JSON.stringify(data));
-        alert('Workout data saved successfully!')
+    if (isValidData) {
+        data = { ...data, actual: 0 }
+
+        saveWorkout(data);
+        location.reload();
     }
 }
 
-console.log(submitForm)
-submitForm.addEventListener("submit", submitWorkout);
+submitForm.addEventListener('submit', submitWorkout);
+
+document.getElementById('newWorkout_cancelButton').addEventListener('click', function () {
+    document.getElementById('newWorkoutModal').classList.add('display-none');
+})
