@@ -23,7 +23,11 @@ function redirect(url) {
  */
 function getLoginData() {
     let login = localStorage.getItem('login');
-    login ? login = JSON.parse(login) : login = [];
+    if (login) {
+        login = JSON.parse(login);
+    } else {
+        login = []
+    }
 
     return login;
 }
@@ -36,7 +40,11 @@ function getLoginData() {
  */
 function getUsersData() {
     let users = localStorage.getItem('users');
-    users ? users = JSON.parse(users) : users = [];
+    if (users) {
+        users = JSON.parse(users) 
+    } else {
+        users = []
+    }
 
     return users;
 }

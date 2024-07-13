@@ -109,7 +109,7 @@ function addUser(data) {
     setLoginData(login);
 
     const users = getUsersData();
-    users.push({ ...data, password, confirmPassword: ''});
+    users.push({ ...data, password, confirmPassword: '' });
     setUsersData(users);
 }
 
@@ -143,7 +143,7 @@ function handleRegistrationForm(event) {
     addUser(data);
 
     formEl.reset();
-    
+
     let limit = 5;
     redirectingEl.classList.remove(DISPLAY_NONE);
     counterEl.textContent = limit;
@@ -160,7 +160,7 @@ function handleRegistrationForm(event) {
 }
 
 // Event Listeners
-document.getElementById('toLogin').addEventListener('click', function() {
+document.getElementById('toLogin').addEventListener('click', function () {
     redirect('index.html');
 })
 

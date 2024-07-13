@@ -12,14 +12,27 @@ const REQUIRED_ERROR_MESSAGE = 'field is required.';
 const USERNAME_PASS_ERROR_MESSAGE = 'Wrong username or password.';
 const NO_USER_FOUND = 'No user has been found, please register first.';
 
+/**
+ * Display Error Message
+ * @param {*} message
+ * @returns {void}
+ * @description Function to display the error message
+ */
 function displayErrorMessage(message) {
     generalErrorEl.textContent = message;
     generalErrorEl.classList.remove(DISPLAY_NONE);
 }
 
+/**
+ * Login
+ * @param {*} username 
+ * @param {*} password 
+ * @returns {boolean}
+ * @description Function to login the user
+ */
 function login(username, password) {
     const login = getLoginData();
-    
+
     if (!login.length) {
         displayErrorMessage(NO_USER_FOUND);
         return false;
@@ -39,6 +52,12 @@ function login(username, password) {
     return true;
 }
 
+/**
+ * Handle Login Form Submit
+ * @param {*} event 
+ * @returns {void}
+ * @description Function to handle the
+ */
 function handleLoginFormSubmit(event) {
     event.preventDefault();
 
@@ -53,7 +72,7 @@ function handleLoginFormSubmit(event) {
         usernameEl.focus();
         return;
     }
-    
+
     usernameErrorEl.classList.add(DISPLAY_NONE);
 
     if (!password) {
@@ -62,9 +81,9 @@ function handleLoginFormSubmit(event) {
         passwordEl.focus();
         return;
     }
-    
+
     passwordErrorEl.classList.add(DISPLAY_NONE);
-    
+
     formEl.reset();
 
     if (login(username, password)) {
@@ -72,16 +91,21 @@ function handleLoginFormSubmit(event) {
     }
 }
 
+/**
+ * Init
+ * @returns {void}
+ * @description Function to initialize the script
+ */
 function init() {
     formEl.addEventListener('submit', handleLoginFormSubmit);
 
-    toRegisterEl.addEventListener('click', function() {
+    toRegisterEl.addEventListener('click', function () {
         redirect('pages/register.html');
     });
 
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) return;
-    
+
     redirect('pages/dashboard.html');
 }
 
