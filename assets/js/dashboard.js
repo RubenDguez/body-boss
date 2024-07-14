@@ -3,15 +3,27 @@ const firstNameEl = document.getElementById('firstName');
 const lastNameEl = document.getElementById('lastName');
 const emailEl = document.getElementById('email');
 const profileButtonEl = document.getElementById('profileButton');
-const bmiCalcButtonEl = document.getElementById('bmiCalcButton')
+const logWorkoutButtonEl = document.getElementById('logWorkoutButton');
+const workoutsButtonEl = document.getElementById('workoutsButton');
+const bmiCalcButtonEl = document.getElementById('bmiCalcButton');
+
 const profileModalEl = document.getElementById('profileModal');
-const bmiCalcModalEl = document.getElementById('bmiCalcModal')
+const workoutModalEl = document.getElementById('newWorkoutModal');
+const logWorkoutModalEl = document.getElementById('logWorkoutModal');
+const bmiCalcModalEl = document.getElementById('bmiCalcModal');
+
+
 const color = { bgColor: '', textColor: '', progressBgColor: '' };
 
 const DISPLAY_NONE = 'display-none';
 
 let currentUser;
 
+/**
+ * Handle Display Profile Modal
+ * @returns {void}
+ * @description Function to display the profile modal
+ */
 function handleDisplayProfileModal() {
     const errorMessageEl = document.getElementById('profileModal_generalError');
     errorMessageEl.textContent = ''
@@ -20,6 +32,11 @@ function handleDisplayProfileModal() {
     profileModalEl.classList.toggle(DISPLAY_NONE);
 }
 
+/**
+ * Handle Display BMI Calculator Modal
+ * @returns {void}
+ * @description Function to display the BMI Calculator modal
+ */
 function handleDisplayBMICalcModal() {
     const errorMessageEl = document.getElementById('bmiCalcModal_generalError');
     errorMessageEl.textContent = ''
@@ -28,10 +45,21 @@ function handleDisplayBMICalcModal() {
     bmiCalcModalEl.classList.toggle(DISPLAY_NONE);
 }
 
+/**
+ * Handle Cancel BMI Calculator Modal
+ * @returns {void}
+ * @description Function to handle the cancel button on the
+ */
 function handleCancelBMICalcModal() {
     location.reload();
 }
 
+/**
+ * Validate Email
+ * @param {*} email 
+ * @returns {boolean}
+ * @description Function to validate email availability
+ */
 function validateEmail(email) {
     const users = getUsersData().filter((user) => (user.id !== currentUser.id));
 
@@ -48,6 +76,12 @@ function validateEmail(email) {
     return isValid
 }
 
+/**
+ * Validate Username
+ * @param {*} username 
+ * @returns {boolean}
+ * @description Function to validate username availability
+ */
 function validateUsername(username) {
     const users = getUsersData().filter((user) => (user.id !== currentUser.id));
 
@@ -64,6 +98,12 @@ function validateUsername(username) {
     return isValid
 }
 
+/**
+ * Validate Empty
+ * @param {*} data 
+ * @returns {boolean}
+ * @description Function to validate empty fields
+ */
 function validateEmptyFields(data) {
     for (const key of Object.keys(data)) {
         const errorMessage = document.getElementById(`profileModal_${key}Error`);
@@ -77,6 +117,12 @@ function validateEmptyFields(data) {
     return true;
 }
 
+/**
+ * Validate User Information
+ * @param {*} data 
+ * @returns {boolean}
+ * @description Function to validate user information
+ */
 function validateUserInformation(data) {
     const info = { ...data };
     delete info.password;
@@ -85,6 +131,13 @@ function validateUserInformation(data) {
     return (validateEmptyFields(info) && validateUsername(info.username) && validateEmail(info.email));
 }
 
+/**
+ * Validate Password
+ * @param {*} password 
+ * @param {*} confirmPassword 
+ * @returns {boolean}
+ * @description Function to validate password
+ */
 function validatePassword(password, confirmPassword) {
     const errorMessageEl = document.getElementById('profileModal_confirmPasswordError');
 
@@ -97,6 +150,12 @@ function validatePassword(password, confirmPassword) {
     return true;
 }
 
+/**
+ * Save
+ * @param {*} data 
+ * @returns {void}
+ * @description Function to save user information
+ */
 function save(data) {
     const info = { ...data };
     const users = getUsersData().filter((user) => (user.id !== currentUser.id));
@@ -123,9 +182,15 @@ function save(data) {
     localStorage.setItem('login', JSON.stringify(logins));
 }
 
+/**
+ * Handle Save
+ * @param {*} event
+ * @returns {void}
+ * @description Function to handle save button click
+ */
 function handleSave(event) {
-    event.stopPropagation();
     event.preventDefault();
+    event.stopPropagation();
     const formEl = document.querySelector('form');
     const formData = new FormData(formEl);
     const data = {
@@ -147,15 +212,27 @@ function handleSave(event) {
     }
 }
 
+/**
+ * Handle Cancel
+ * @returns {void}
+ * @description Function to handle the cancel button on the profile modal
+ */
 function handleCancel() {
     handleDisplayProfileModal();
 }
 
+/**
+ * Calculate BMI
+ * @param {*} event 
+ * @returns {void}
+ * @description Function to calculate BMI
+ */
 function calculateBMI(event) {
-    event.stopPropagation();
     event.preventDefault();
+    event.stopPropagation();
 
-    const calculateBMIFormEl = document.querySelectorAll('form')[1];
+    const calculateBMIFormEl = document.querySelectorAll('form')[3];
+
     const calcOutput = document.getElementById('bmiCalcModal_calcOutput');
     const calcNumber = document.getElementById('bmiCalcModal_calcNumber');
     const bmiMeaning = document.getElementById('bmiCalcModal_bmiMeaning');
@@ -250,9 +327,22 @@ profileButtonEl.addEventListener('click', function () {
     cancelButton.addEventListener('click', handleCancel);
 });
 
+workoutsButtonEl.addEventListener('click', function () {
+    workoutModalEl.classList.remove(DISPLAY_NONE);
+});
+
+logWorkoutButtonEl.addEventListener('click', function() {
+    logWorkoutModalEl.classList.remove(DISPLAY_NONE);
+
+    const logWorkoutModalCancelButtonEl = document.getElementById('logWorkoutModal_cancelButton');
+    logWorkoutModalCancelButtonEl.addEventListener('click', function() {
+        logWorkoutModalEl.classList.add(DISPLAY_NONE);
+    })
+})
+
 bmiCalcButtonEl.addEventListener('click', function () {
     const cancelButtonEl = document.getElementById('bmiCalcModal_cancelButton');
-    const calculateBMIFormEl = document.querySelectorAll('form')[1];
+    const calculateBMIFormEl = document.querySelectorAll('form')[3];
 
     handleDisplayBMICalcModal();
 
@@ -263,6 +353,8 @@ bmiCalcButtonEl.addEventListener('click', function () {
 document.body.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
         profileModalEl.classList.add(DISPLAY_NONE);
+        workoutModalEl.classList.add(DISPLAY_NONE);
+        logWorkoutModalEl.classList.add(DISPLAY_NONE);
         bmiCalcModalEl.classList.add(DISPLAY_NONE);
     }
 });
