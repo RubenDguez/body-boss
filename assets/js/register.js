@@ -121,6 +121,7 @@ function addUser(data) {
  */
 function handleRegistrationForm(event) {
     event.preventDefault();
+    event.stopPropagation();
 
     const formData = new FormData(formEl);
     const redirectingEl = document.getElementById('redirecting');

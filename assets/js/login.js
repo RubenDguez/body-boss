@@ -60,6 +60,7 @@ function login(username, password) {
  */
 function handleLoginFormSubmit(event) {
     event.preventDefault();
+    event.stopPropagation();
 
     const formData = new FormData(formEl);
 
