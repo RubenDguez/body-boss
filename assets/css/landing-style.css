@@ -26,12 +26,6 @@
     cursor: pointer;
 }
 
-#partners {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
 #partners img {
     width: 150px;
     max-width: 150px;

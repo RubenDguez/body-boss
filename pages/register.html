@@ -9,22 +9,23 @@
 		<link rel="stylesheet" href="../assets/css/style.css" />
 		<link rel="stylesheet" href="../assets/css/register.css" />
 	</head>
-	<body class="bg-black">
-		<header class="container mx-auto py-10">
-			<h1>Body Boss</h1>
+	<body class="bg-black p-10">
+		<header>
+			<h1 class="text-xl text-center sm:text-4xl">Body Boss</h1>
+			<h2 class="mt-10 text-center font-bold text-white">Registration Form</h2>
 		</header>
 		<main>
-			<section id="hero" class="container mx-auto py-5">
-				<section id="login" class="text-white flex flex-col">
+			<section class="lg:flex lg:gap-4">
+				<section class="lg:w-1/2">
 					<header>
 						<h3 id="generalError" class="display-none py-2 text-xl text-red-600 text-center bg-red-300 max-w-lg mx-auto rounded mb-3">General Error Here</h3>
 						<h3 id="redirecting" class="display-none py-2 text-xl text-green-600 text-center max-w-lg mx-auto rounded mb-3">Redirecting to login page in: <span id="counter"></span></h3>
-						<h2 class="text-4xl text-center">Register</h2>
+						<h2>Register</h2>
 					</header>
-					<div class="flex flex-col gap-4 py-5 px-10">
-						<form id="register" class="flex flex-col">
-							<div class="flex gap-4">
-								<div class="flex grow flex-col gap-4">
+					<div class="text-white">
+						<form id="register">
+							<div class="flex flex-col gap-4">
+								<div class="flex flex-col gap-4">
 									<div class="flex flex-col">
 										<label for="firstName">First name</label>
 										<input type="text" name="firstName" id="firstName" class="rounded p-2 text-black" />
@@ -41,7 +42,7 @@
 										<h5 id="emailError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Email field is required</h5>
 									</div>
 								</div>
-								<div class="flex grow flex-col gap-4">
+								<div class="flex flex-col gap-4">
 									<div class="flex flex-col">
 										<label for="username">Username</label>
 										<input type="text" name="username" id="username" class="rounded p-2 text-black" />
@@ -58,17 +59,19 @@
 										<h5 id="confirmPasswordError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Confirm password is required</h5>
 									</div>
 								</div>
+								<input class="border rounded py-2 mt-2 hover:bg-yellow-600" id="submit" type="submit" value="REGISTER" />
 							</div>
-							<input class="border rounded py-2 mt-2 hover:bg-yellow-600" id="submit" type="submit" value="REGISTER" />
 						</form>
 					</div>
-					<div id="not-registered" class="text-center mt-5">
+					<div id="not-registered" class="mt-5 text-white text-center">
 						<h3>
 							Already a member? <span id="toLogin" class="pointer text-gray-600 font-bold">login</span>
 						</h3>
 					</div>
 				</section>
-				<section class="hero-image"></section>
+				<section class="min-[300px]:mt-10 lg:w-1/2">
+					<img class="min-[300px]:w-full" src="../assets/img/swimmer.jpeg" alt="swimmer">
+				</section>
 			</section>
 		</main>
 		<script src="../assets/js/script.js"></script>
