@@ -96,3 +96,12 @@ We welcome contributions! Please follow these guidelines:
 3. Commit your changes (`git commit -m 'Add new feature'`).
 4. Push to the branch (`git push origin feature-branch`).
 5. Create a new Pull Request.
+
+## QR Codes
+
+### Webpage QR Code
+<img src="assets/img/bodyboss-webpage.png" alt="Webpage QR Code" width="150"/>
+
+
+### GitHub 
+<img src="assets/img//githubrepo.png" alt="GitHub Repo" width="150">
