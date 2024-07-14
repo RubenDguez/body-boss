@@ -82,6 +82,26 @@ function saveWorkout(data) {
     localStorage.setItem(WORKOUT, JSON.stringify(workout));
 }
 
+function updateWorkout(id, data) {
+    const workoutList = getWorkoutList();
+    const filteredWorkout = workoutList.filter((wOut) => (wOut.id != id));
+    const currentWorkout = workoutList.find((wOut) => (wOut.id == id));
+    const timestamp = new Date().getTime();
+    const updatedWorkout = {...currentWorkout, ...data, updatedAt: timestamp}
+    const updateStoreData = [...filteredWorkout, updatedWorkout];
+
+    const localStorageWorkoutData = localStorage.getItem(WORKOUT);
+    const parsedLocalStorageWorkoutData = JSON.parse(localStorageWorkoutData);
+    const currentUser = parseInt(localStorage.getItem('currentUser'));
+
+    const updatedLocalStorageWorkoutData = {...parsedLocalStorageWorkoutData, [currentUser]: [...updateStoreData]};
+
+
+    localStorage.setItem(WORKOUT, JSON.stringify(updatedLocalStorageWorkoutData));
+
+    location.reload();
+}
+
 /**
  * Submit Workout
  * @param {*} event
@@ -91,7 +111,8 @@ function saveWorkout(data) {
  */
 function submitWorkout(event) {
     event.preventDefault();
-    const formEl = document.querySelectorAll('form')[2];
+    event.stopPropagation();
+    const formEl = document.querySelectorAll('form')[1];
 
     const formData = new FormData(formEl);
 
@@ -110,6 +131,109 @@ function submitWorkout(event) {
         location.reload();
     }
 }
+
+function openWorkout(id) {
+    const workout = getWorkoutList().find((workout) => (workout.id == id));
+    if (!workout) return;
+    
+    const editWorkoutModalEl = document.getElementById('editWorkoutModal');
+    editWorkoutModalEl.classList.remove(DISPLAY_NONE);
+
+    const editWorkoutTypeEl = document.getElementById('editWorkoutType');
+    const editGoalEl = document.getElementById('editGoal');
+    const editActualEl = document.getElementById('editActual');
+    const editNotesEl = document.getElementById('editNotes');
+    const editWorkoutCancelButtonEl = document.getElementById('editWorkout_cancelButton');
+
+    editWorkoutTypeEl.value = workout.type;
+    editGoalEl.value = workout.goal;
+    editActualEl.value = workout.actual;
+    editActualEl.setAttribute('min', workout.actual)
+    editActualEl.setAttribute('max', workout.goal)
+    editNotesEl.value = workout.notes;
+
+    const formEl = document.querySelectorAll('form')[2];
+
+    formEl.addEventListener('submit', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const formData = new FormData(formEl);
+        const data = {
+            ...workout,
+            type: formData.get('editWorkoutType'),
+            goal: parseInt(formData.get('editGoal')),
+            actual: parseInt(formData.get('editActual')),
+            notes: formData.get('editNotes')
+        }
+
+        updateWorkout(id, data);
+    });
+
+    editWorkoutCancelButtonEl.addEventListener('click', function() {
+        editWorkoutModalEl.classList.add(DISPLAY_NONE);
+    });
+}
+
+/**
+ * Add Workout Section
+ * @param {*} workout 
+ * @returns {void}
+ * @description Function to add a workout section to the page
+ */
+function addWorkoutSection(workout) {
+    if (workout.actual === workout.goal) return;
+
+    const yourWorkoutContainerEl = document.getElementById('yourWorkoutContainer');
+
+    const sectionWrapper = document.createElement('section');
+    sectionWrapper.setAttribute('class', 'rounded bg-sky-600 pointer');
+    sectionWrapper.setAttribute('data-id', workout.id);
+
+    const divWrapper = document.createElement('div');
+    divWrapper.setAttribute('class', 'flex min-[300px]:flex-col md:flex-row bg-sky-200 py-5 ml-2');
+    divWrapper.setAttribute('style', 'align-items: center;')
+
+    const header = document.createElement('h2');
+    header.setAttribute('class', 'pl-3 font-bold md:min-w-52 md:max-w-52 text-left');
+    const createdAt = new Date(workout.createdAt).toLocaleDateString();
+    header.textContent = `${workout.type}: ${createdAt}`;
+
+    const paragraph = document.createElement('p');
+    paragraph.setAttribute('class', 'grow min-[300px]:px-4');
+    paragraph.textContent = workout.notes;
+
+    const statParagraph = document.createElement('p');
+    statParagraph.setAttribute('class', 'text-right pr-3 md:min-w-52 italic text-sky-600');
+    statParagraph.textContent = `${workout.actual} of ${workout.goal}`
+
+    divWrapper.appendChild(header);
+    divWrapper.appendChild(paragraph);
+    divWrapper.appendChild(statParagraph);
+    sectionWrapper.appendChild(divWrapper);
+
+    yourWorkoutContainerEl.appendChild(sectionWrapper);
+
+    sectionWrapper.addEventListener('click', function () {
+        openWorkout(sectionWrapper.dataset.id);
+    })
+}
+
+function addWorkouts() {
+    const workouts = getWorkoutList();
+
+    if (!workouts.length) {
+        return;
+    }
+
+    workouts
+    .toSorted((a, b) => (b.createdAt - a.createdAt))
+    .forEach((workout) => {
+        addWorkoutSection(workout);
+    });
+}
+
+addWorkouts();
 
 submitForm.addEventListener('submit', submitWorkout);
 

@@ -3,10 +3,16 @@ const firstNameEl = document.getElementById('firstName');
 const lastNameEl = document.getElementById('lastName');
 const emailEl = document.getElementById('email');
 const profileButtonEl = document.getElementById('profileButton');
+const logWorkoutButtonEl = document.getElementById('logWorkoutButton');
 const workoutsButtonEl = document.getElementById('workoutsButton');
 const bmiCalcButtonEl = document.getElementById('bmiCalcButton');
+
 const profileModalEl = document.getElementById('profileModal');
-const bmiCalcModalEl = document.getElementById('bmiCalcModal')
+const workoutModalEl = document.getElementById('newWorkoutModal');
+const logWorkoutModalEl = document.getElementById('logWorkoutModal');
+const bmiCalcModalEl = document.getElementById('bmiCalcModal');
+
+
 const color = { bgColor: '', textColor: '', progressBgColor: '' };
 
 const DISPLAY_NONE = 'display-none';
@@ -183,8 +189,8 @@ function save(data) {
  * @description Function to handle save button click
  */
 function handleSave(event) {
-    event.stopPropagation();
     event.preventDefault();
+    event.stopPropagation();
     const formEl = document.querySelector('form');
     const formData = new FormData(formEl);
     const data = {
@@ -222,10 +228,11 @@ function handleCancel() {
  * @description Function to calculate BMI
  */
 function calculateBMI(event) {
-    event.stopPropagation();
     event.preventDefault();
+    event.stopPropagation();
 
-    const calculateBMIFormEl = document.querySelectorAll('form')[1];
+    const calculateBMIFormEl = document.querySelectorAll('form')[3];
+
     const calcOutput = document.getElementById('bmiCalcModal_calcOutput');
     const calcNumber = document.getElementById('bmiCalcModal_calcNumber');
     const bmiMeaning = document.getElementById('bmiCalcModal_bmiMeaning');
@@ -321,14 +328,21 @@ profileButtonEl.addEventListener('click', function () {
 });
 
 workoutsButtonEl.addEventListener('click', function () {
-    const workoutModalEl = document.getElementById('newWorkoutModal');
-
     workoutModalEl.classList.remove(DISPLAY_NONE);
 });
 
+logWorkoutButtonEl.addEventListener('click', function() {
+    logWorkoutModalEl.classList.remove(DISPLAY_NONE);
+
+    const logWorkoutModalCancelButtonEl = document.getElementById('logWorkoutModal_cancelButton');
+    logWorkoutModalCancelButtonEl.addEventListener('click', function() {
+        logWorkoutModalEl.classList.add(DISPLAY_NONE);
+    })
+})
+
 bmiCalcButtonEl.addEventListener('click', function () {
     const cancelButtonEl = document.getElementById('bmiCalcModal_cancelButton');
-    const calculateBMIFormEl = document.querySelectorAll('form')[1];
+    const calculateBMIFormEl = document.querySelectorAll('form')[3];
 
     handleDisplayBMICalcModal();
 
@@ -339,6 +353,8 @@ bmiCalcButtonEl.addEventListener('click', function () {
 document.body.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
         profileModalEl.classList.add(DISPLAY_NONE);
+        workoutModalEl.classList.add(DISPLAY_NONE);
+        logWorkoutModalEl.classList.add(DISPLAY_NONE);
         bmiCalcModalEl.classList.add(DISPLAY_NONE);
     }
 });
