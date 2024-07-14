@@ -304,13 +304,13 @@
 									<ol class="flex flex-col gap-4">
 										<li>
 											<h3 class="text-2xl font-bold mb-5">Height</h3>
-											<div class="flex gap-4 grow">
-												<div>
+											<div class="flex min-[300px]:flex-col md:flex-row gap-4 grow">
+												<div class="flex flex-col grow">
 													<label for="bmiCalcModal_feet">Feet</label>
 													<input type="number" name="bmiCalcModal_feet" id="bmiCalcModal_feet" class="border rounded p-2 text-black" value="0" min="0" />
 													<h5 id="bmiCalcModal_feetError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Feet field is required</h5>
 												</div>
-												<div>
+												<div class="flex flex-col grow">
 													<label for="bmiCalcModal_inches">Inch (es)</label>
 													<input type="number" name="bmiCalcModal_inches" id="bmiCalcModal_inches" class="border rounded p-2 text-black" value="0" min="0" />
 													<h5 id="bmiCalcModal_inchesError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Inch(es) field is required</h5>
@@ -319,8 +319,8 @@
 										</li>
 										<li>
 											<h3 class="text-2xl font-bold mb-5">Weight</h3>
-											<div class="flex gap-4 grow">
-												<div>
+											<div class="flex min-[300px]:flex-col gap-4 grow">
+												<div class="flex flex-col">
 													<label for="bmiCalcModal_pounds">Pounds</label>
 													<input type="number" name="bmiCalcModal_pounds" id="bmiCalcModal_pounds" class="border rounded p-2 text-black" value="0" min="0" />
 													<h5 id="bmiCalcModal_poundsError" class="display-none text-red-600 bg-red-300 py-1 pl-3 rounded mt-2">Pounds field is required</h5>
