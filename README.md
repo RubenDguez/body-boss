@@ -46,9 +46,9 @@ During the development of Body Boss, we learned about the intricacies of client-
 
 ### Screenshots
 
+![Login](assets/img/login.png)
+![Register](assets/img/register.png)
 ![Home Page](assets/img/homepage.png)
-![Workout Tracker](assets/img/workout-tracker.png)
-![Profile Update](assets/img/profile-update.png)
 
 ## Credits
 
